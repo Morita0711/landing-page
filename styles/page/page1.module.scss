@@ -1,0 +1,82 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+
+  .header {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8%;
+    color: white;
+    .headeroption {
+      display: flex;
+    }
+    padding-inline: 4%;
+    span {
+      padding: 10px;
+    }
+  }
+
+  .border{
+    height: 92%;    
+    padding: 12% 7%;
+  }
+
+  .body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+    border: 1px solid #707070;
+    background: #7068AF 0% 0% no-repeat padding-box;
+    box-shadow: inset 0px 3px 6px #000000FC, 19px 11px 6px #280380B3;
+    border: 1px solid #707070;
+    border-radius: 81px;
+    opacity: 1;
+    .bodyTop {
+      display: flex;
+      background-color: #ad78b3;
+      .title {
+      }
+    }
+
+    .bodyMain {
+      display: flex;
+
+      .left {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .center {
+        display: flex;
+        flex-direction: column;
+
+        .actTap {
+          display: flex;
+
+          .btnFunc {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+
+            .leftTap {
+              display: flex;
+            }
+          }
+
+          .btnDown {
+          }
+        }
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
