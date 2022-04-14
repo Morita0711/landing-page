@@ -16,7 +16,7 @@ a {
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: url("../asset/font/Poppins/Poppins-Regular.ttf");
+  font-family: "OpenSans";
+  src: url("../asset/font/OpenSans-Regular.ttf");
   font-style: normal;
 }
