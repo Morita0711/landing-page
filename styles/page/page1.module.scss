@@ -4,28 +4,23 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
 
-  .header {
-    background-color: black;
-    display: flex;
-    flex: 1 1 0;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
 
-    .dmh{
-        background-image: url(../../asset/dmh.png);
-    }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
 
-    .headeroption {
-      display: flex;
-      align-items: center;
-    }
-
-    padding-inline: 4%;
-    span {
-      padding: 10px;
-    }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 
   .border {
@@ -39,8 +34,6 @@
 
   .body {
     display: flex;
-    max-height: 900px;
-    max-width: 850px;
     height: 600px;
     width: 830px;
     flex-direction: column;
@@ -61,7 +54,7 @@
       height: 10%;
       color: #ffffff;
       text-align: center;
-      font: normal normal normal     OpenSans, Regular;
+      font: normal normal normal OpenSans, Regular;
       letter-spacing: 0px;
       margin-bottom: 17px;
     }
@@ -69,24 +62,32 @@
     .bodyMain {
       display: flex;
       height: 100%;
+      @media(max-width: 850px) {
+        flex-direction: column;
+      }
       .left {
         display: flex;
         flex-direction: column;
         flex: 1 1 0;
+        overflow: auto;
+
         .part3 {
           display: flex;
           justify-content: center;
+          @media(max-width: 850px) {
+            display: none;
+          }
 
           button {
             box-shadow: 2px 2px 0px 0px #000000fc;
             background: #a2b4d2 0% 0% no-repeat padding-box;
             border: 1px solid #707070;
             opacity: 1;
-            width: 50px;
+            width: 40px;
             margin-right: 30%;
             border-radius: 50%;
             text-align: center;
-            font: normal normal normal 30px OpenSans;
+            font: normal normal normal 20px OpenSans;
             letter-spacing: 0px;
             color: #ffffff;
           }
@@ -97,6 +98,7 @@
           display: flex;
           margin-bottom: 10px;
           align-items: center;
+          justify-content: center;
           div:nth-child(1) {
             box-shadow: 3px 3px 0px 1px rgb(171 9 219 / 75%);
             background: #ffa7fc 0% 0% no-repeat padding-box;
@@ -105,9 +107,9 @@
             width: 70%;
             margin-right: 10px;
             text-align: center;
-            font: normal normal normal 20px OpenSans;
+            font: normal normal normal 17px OpenSans;
             letter-spacing: 0px;
-
+            white-space: nowrap;
             color: #ffffff;
           }
 
@@ -117,10 +119,11 @@
             border: 1px solid #707070;
             text-align: center;
             border-radius: 50%;
-            font: normal normal normal 30px OpenSans;
+            font: normal normal normal 20px OpenSans;
             letter-spacing: 0px;
             color: #ffffff;
-            width: 55px;
+            width: 45px;
+            margin-right: 3px;
           }
         }
       }
@@ -135,7 +138,10 @@
           background-image: url(../../asset/quote.png);
           background-repeat: no-repeat;
           background-size: 100% 100%;
-          flex: 2 2 0;
+          height: 300px;
+          @media (max-width:500px){
+            height: 200px;
+          }
           box-shadow: 0px 8px 5px rgb(0 0 0);
           border: 1px solid #707070;
           margin-bottom: 20px;
@@ -149,9 +155,13 @@
             flex: 1 1 0;
             display: flex;
             justify-content: space-between;
-            padding-right: 30px;
+            padding-right: 10px;
             margin-bottom: 20px;
+            white-space: nowrap;
 
+            @media(max-width:380px){
+              flex-direction: column;
+            }
             button {
               box-shadow: 5px 5px 0px 0px #096bdb;
               background: #a7c7ff 0% 0% no-repeat padding-box;
@@ -161,6 +171,10 @@
               height: 30px;
               text-align: center;
               font: normal normal normal 17px OpenSans;
+              @media (max-width:500px) {
+                font: normal normal normal 10px OpenSans;
+                margin-block: 10px;
+              }
               letter-spacing: 0px;
               color: #ffffff;
               text-transform: uppercase;
@@ -170,6 +184,10 @@
           .actTap {
             display: flex;
             padding-right: 30px;
+            @media(max-width:500px){
+              flex-direction: column;
+              padding-right: 0px;
+            }
 
             .btnFunc {
               display: flex;
@@ -178,13 +196,19 @@
               div:nth-child(1) {
                 padding-block: 10 px;
                 margin-block: 10px;
-                span {
+                button {
                   background: #ffffff 0% 0% no-repeat padding-box;
                   border: 1px solid #707070;
-                  width: 100%;
+
+                  @media(max-width: 500px){
+                    width: 100%;
+                  }
                 }
                 text-align: center;
                 font: normal normal normal 20px OpenSans;
+                @media(max-width: 500px) {
+                  font: normal normal normal 12px OpenSans;
+                }
                 white-space: nowrap;
                 letter-spacing: 0px;
                 color: #000000;
@@ -227,6 +251,16 @@
                 opacity: 1;
                 text-align: center;
                 font: normal normal normal 20px OpenSans;
+                @media(max-width:500px){
+                  margin-top: 20px;
+                  width: 100%;
+                  height: 52px;
+                  margin-inline: 0;
+                }
+
+                @media(max-width:450px){
+                  font: normal normal normal 10px OpenSans;
+                }
                 letter-spacing: 0px;
                 color: #ffffff;
                 text-transform: uppercase;
@@ -273,10 +307,12 @@
         > div:nth-child(3),
         > div:nth-child(4),
         > div:nth-child(5) {
-            button{
-                width: 100%;
-                border: none;
-            }
+          button {
+            width: 100%;
+            border: none;
+            text-align: center;
+          }
+
           background: #ffffff 0% 0% no-repeat padding-box;
           border: 1px solid #707070;
           text-align: center;
@@ -294,13 +330,19 @@
         .xy {
           display: flex;
           text-align: center;
-          span:nth-child(1) {
+          input:nth-child(1) {
+            text-align: center;
             margin-right: 5px;
+            width: 50%;
           }
-          span:nth-child(2) {
+          input:nth-child(2) {
+            text-align: center;
             margin-left: 5px;
+            width: 50%;
           }
-          span {
+          input {
+            border: none;
+            outline: none;
             background: #ffffff 0% 0% no-repeat padding-box;
             border: 1px solid #707070;
             flex: 1 1;
@@ -337,7 +379,7 @@
             flex-direction: column;
             flex: 1 1;
             align-items: center;
-            
+
             justify-content: center;
           }
         }
@@ -351,10 +393,77 @@
       }
     }
   }
+}
 
-  .footer {
-    flex: 1 1 0;
-    background-image: url(../../asset/footer.png);
-    background-size: 100% 100%;
+@media (max-width: 850px) {
+  .main {
+    .border{
+      padding: 50px;
+      .body {
+        display: flex;
+        margin: 50px;
+        height: 100%; 
+        width: 100%; 
+        flex-direction: column;
+        border: 1px solid #707070;
+        background: #7068af 0% 0% no-repeat padding-box;
+        box-shadow: inset 0px 3px 6px rgb(0 0 0 / 99%), 10px 7px 6px rgb(40 3 128 / 90%);
+        border: 1px solid #707070;
+        border-radius: 30px;
+        opacity: 1;
+        padding: 30px;
+  
+        .bodyTop{
+          height: 4%;
+        }
+  
+        .bodymain{
+          display: flex;
+          height: 100%;
+          flex-direction: column;
+  
+          .left{
+            .part3{
+              display: none;
+            }
+          }
+        }
+  
+  
+        .bodyTop1,
+        .bodyTop2,  
+        .bodyTop3 {
+          font: normal normal normal 30px OpenSans;
+        }
+  
+        
+      }
+    }
+    
+  }
+}
+
+@media screen and (max-width: 75px) {
+  .main {
+    .body {
+        .bodyTop1,
+      .bodyTop2,.bodyTop3 {
+        font: normal normal normal 18px OpenSans;
+      }
+
+      .bodyTop2 {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .main {
+    .body {
+
+      margin: 140px 20px;
+    }
   }
 }

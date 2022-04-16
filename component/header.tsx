@@ -1,4 +1,4 @@
-import styles from "../styles/page/page1.module.scss";
+import styles from "../styles/page/component.module.scss";
 import Image from "next/image";
 import dmh from "../asset/dmh.png";
 import Texaglo from "../asset/Texaglo.png";

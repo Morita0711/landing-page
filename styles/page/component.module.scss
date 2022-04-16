@@ -1,0 +1,28 @@
+.header {
+    background-color: black;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+    .dmh{
+        background-image: url(../../asset/dmh.png);
+    }
+
+    .headeroption {
+      display: flex;
+      align-items: center;
+    }
+
+    padding-inline: 4%;
+    span {
+      padding: 10px;
+    }
+  }
+
+  .footer {
+    flex: 1 1 0;
+    background-image: url(../../asset/footer.png);
+    background-size: 100% 100%;
+  }

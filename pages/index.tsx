@@ -1,17 +1,58 @@
 import type { NextPage } from "next";
+import React, { useState } from "react";
 import styles from "../styles/page/page1.module.scss";
 import { styled } from "@mui/material/styles";
 import Slider from "@mui/material/Slider";
+import Button from "@mui/material/Button";
+import Dialog, { DialogProps } from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import TextField from "@mui/material/TextField";
 import Switch from "@mui/material/Switch";
 import Image from "next/image";
 import dmh from "../asset/dmh.png";
 import Texaglo from "../asset/Texaglo.png";
 import Header from "../component/header";
 import Footer from "../component/footer";
+import { StepLabel } from "@mui/material";
 
 const Home: NextPage = () => {
+  const [open, setOpen] = React.useState(false);
+  const [scroll, setScroll] = React.useState<DialogProps["scroll"]>("paper");
+  const [label, setLabel] = useState("");
+  const handleClickOpen = (scrollType, temp) => () => {
+    setLabel(temp);
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const descriptionElementRef = React.useRef<HTMLElement>(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
+  const [temp, setTemp] = useState(["Layer 1", "Layer 2"]);
+
+  const popUp = () => {
+    var len = "Layer " + Number(temp.length + 1);
+    console.log(temp);
+    setTemp((temp) => [...temp, len]);
+
+    console.log(temp);
+  };
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 60,
     height: 17,
@@ -59,16 +100,15 @@ const Home: NextPage = () => {
           <div className={styles.bodyTop}>Art Generator</div>
           <div className={styles.bodyMain}>
             <div className={styles.left}>
-              <div className={styles.part1}>
-                <div>Layer 1</div>
-                <button>+</button>
-              </div>
-              <div className={styles.part2}>
-                <div>Layer 2</div>
-                <button>+</button>
-              </div>
+              {temp.map((value, index) => (
+                <div className={styles.part1} key={index}>
+                  <div>{value}</div>
+                  <button onClick={() => popUp()}>+</button>
+                </div>
+              ))}
+
               <div className={styles.part3}>
-                <button>+</button>
+                <button onClick={() => popUp()}>+</button>
               </div>
             </div>
             <div className={styles.center}>
@@ -82,7 +122,11 @@ const Home: NextPage = () => {
                 <div className={styles.actTap}>
                   <div className={styles.btnFunc}>
                     <div>
-                      <span>How many NFT...</span>
+                      <button
+                        onClick={handleClickOpen("paper", "How many NFT...")}
+                      >
+                        How many NFT...
+                      </button>
                     </div>
                     <div className={styles.leftTap}>
                       <button>UPLOAD</button>
@@ -105,19 +149,29 @@ const Home: NextPage = () => {
               </div>
 
               <div>
-                <button>Project Name</button>
+                <button onClick={handleClickOpen("paper", "Project Name")}>
+                  Project Name
+                </button>
               </div>
 
               <div>
-                <button>Website Name</button>
+                <button onClick={handleClickOpen("paper", "Website Name")}>
+                  Website Name
+                </button>
               </div>
 
               <div>
-                <button>Project Description</button>
+                <button
+                  onClick={handleClickOpen("paper", "Project Description")}
+                >
+                  Project Description
+                </button>
               </div>
 
               <div>
-                <button>Base uri</button>
+                <button onClick={handleClickOpen("paper", "Base uri")}>
+                  Base uri
+                </button>
               </div>
 
               <div>
@@ -125,8 +179,18 @@ const Home: NextPage = () => {
               </div>
 
               <div className={styles.xy}>
-                <span>X</span>
-                <span>Y</span>
+                <input
+                  defaultValue="X"
+                  onChange={() => {
+                    console.log("first");
+                  }}
+                />
+                <input
+                  defaultValue="Y"
+                  onChange={() => {
+                    console.log("first");
+                  }}
+                />
               </div>
 
               <div>
@@ -138,11 +202,9 @@ const Home: NextPage = () => {
                   <span>25%</span>
                   <span>Trait 1</span>
                   <Slider
-                    aria-label="time-indicator"
+                    aria-label="Trait_1"
                     size="small"
-                    min={0}
-                    step={1}
-                    value={20}
+                    defaultValue={67}
                     sx={{
                       width: "35%",
                       color: "white",
@@ -153,11 +215,9 @@ const Home: NextPage = () => {
                   <span>25%</span>
                   <span>Trait 2</span>
                   <Slider
-                    aria-label="time-indicator"
+                    aria-label="Trait_2"
                     size="small"
-                    min={0}
-                    step={1}
-                    value={40}
+                    defaultValue={27}
                     sx={{
                       width: "35%",
                       color: "white",
@@ -168,11 +228,9 @@ const Home: NextPage = () => {
                   <span>20%</span>
                   <span>Trait 3</span>
                   <Slider
-                    aria-label="time-indicator"
+                    aria-label="Trait_3"
                     size="small"
-                    min={0}
-                    step={1}
-                    value={15}
+                    defaultValue={15}
                     sx={{
                       width: "35%",
                       color: "white",
@@ -183,11 +241,9 @@ const Home: NextPage = () => {
                   <span>20%</span>
                   <span>Trait 4</span>
                   <Slider
-                    aria-label="time-indicator"
+                    aria-label="Trait_4"
                     size="small"
-                    min={0}
-                    step={1}
-                    value={35}
+                    defaultValue={30}
                     sx={{
                       width: "35%",
                       color: "white",
@@ -198,11 +254,9 @@ const Home: NextPage = () => {
                   <span>10%</span>
                   <span>Trait 5</span>
                   <Slider
-                    aria-label="time-indicator"
+                    aria-label="Trait_5"
                     size="small"
-                    min={0}
-                    step={1}
-                    value={40}
+                    defaultValue={30}
                     sx={{
                       width: "35%",
                       color: "white",
@@ -233,6 +287,28 @@ const Home: NextPage = () => {
         </div>
       </div>
       <Footer />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Please Edit</DialogTitle>
+        <DialogContent dividers={scroll === "paper"}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            <TextField id="filled-basic" label={label} variant="filled" />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>OK</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
