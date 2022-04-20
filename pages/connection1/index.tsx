@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "../../styles/page/page1.module.scss";
 import { styled } from "@mui/material/styles";
 import Slider from "@mui/material/Slider";
@@ -18,27 +18,41 @@ import Texaglo from "../../asset/Texaglo.png";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
 import quote from "../../asset/quote.png";
-import { StepLabel } from "@mui/material";
 import Image from "next/image";
 import { useWallet } from "@saberhq/use-solana";
+import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom"
+import * as solanaWeb3 from '@solana/web3.js';
 
-interface Phantom {}
+interface Phantom { }
 
-const Home: NextPage = () => {
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState<DialogProps["scroll"]>("paper");
+const Connection3 = () => {
+  const { connected, connection, wallet } = useWallet();
+  const usWalllet = useWallet();
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   console.log("[useWallet]: ", usWalllet);
+  //   console.log(solanaWeb3);
+  //   console.log("[connected]: ", connected);
+  //   console.log("[connection]: ", connection);
+  //   console.log("[wallet]: ", wallet);
+  //   //if (!connected) router.replace("/", "/")
+  // }, [])
+
+  useEffect(() => {
+
+    if (window.sessionStorage.getItem("session") == "false") router.push("/")
+  }, [])
+
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState < DialogProps["scroll"] > ("paper");
   const [label, setLabel] = useState("");
   const [flag, setFlag] = useState(false);
   const [layerName, setLayerName] = useState();
-  const [phantom, setPhantom] = useState<Phantom | null>(null);
+  const [phantom, setPhantom] = useState < Phantom | null > (null);
 
-  useEffect(() => {
-    if (window["solana"]?.isPhantom) {
-      setPhantom(window["solana"]);
-    }
-  }, []);
-
-  const handleClickOpen = (scrollType, temp) => () => {
+  const handleClickOpen = (scrollType: any, temp: any) => () => {
     setLabel(temp);
     setOpen(true);
     setScroll(scrollType);
@@ -49,14 +63,14 @@ const Home: NextPage = () => {
   };
 
   const [imageUrl, setImageUrl] = useState("");
-  const fileBrowseHandler = (event) => {
+  const fileBrowseHandler = (event: any) => {
     let value = URL.createObjectURL(event.target.files[0]);
     setImageUrl(value);
     console.log(value);
   };
 
-  const descriptionElementRef = React.useRef<HTMLElement>(null);
-  React.useEffect(() => {
+  const descriptionElementRef = useRef < HTMLElement > (null);
+  useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {
@@ -66,7 +80,7 @@ const Home: NextPage = () => {
   }, [open]);
 
   const [temp, setTemp] = useState(["Layer 1", "Layer 2"]);
-  const [index, setIndex] = useState();
+  const [index, setIndex] = useState(0);
 
   const popUp = () => {
     var len = "Layer " + Number(temp.length + 1);
@@ -76,13 +90,13 @@ const Home: NextPage = () => {
     console.log(temp);
   };
 
-  const layerFunc = (name, index) => {
+  const layerFunc = (name: any, index: any) => {
     setFlag(true);
     setLayerName(name);
     setIndex(index);
   };
 
-  const editValue = (value) => {
+  const editValue = (value: any) => {
     setLayerName(value);
     let _temp = [...temp]; // copying the old datas array
     _temp[index] = value;
@@ -128,6 +142,7 @@ const Home: NextPage = () => {
       borderRadius: 20 / 2,
     },
   }));
+
   return (
     <div className={styles.main}>
       <Header />
@@ -328,6 +343,7 @@ const Home: NextPage = () => {
                 <div className={styles.chain1}>
                   <div className={styles.chainTitle}>Ethereum</div>
                   <FormControlLabel
+                    label=""
                     style={{ margin: 0 }}
                     control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
                   />
@@ -336,6 +352,7 @@ const Home: NextPage = () => {
                 <div className={styles.chain2}>
                   <span className={styles.chainTitle}>IPFS</span>
                   <FormControlLabel
+                    label=""
                     style={{ margin: 0 }}
                     control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
                   />
@@ -373,4 +390,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Connection3;

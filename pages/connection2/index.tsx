@@ -1,10 +1,30 @@
 import styles from "../../styles/page/connection2.module.scss";
 import Header from "../../component/header";
 import Footer from "../../component/footer";
-import { Router, useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
+import { useWallet } from "@saberhq/use-solana";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 
-const connection2 = () => {
-  const router = useRouter();
+
+const Connection2 = () => {
+  const { connected, connection, wallet } = useWallet();
+  const router = useRouter();    
+
+  /* useEffect(() => {
+    console.log("connection1_connected", connected)
+    if (!connected) router.push("/")
+  }, [connected]) */
+  useEffect(() => {
+    if (window.sessionStorage.getItem("session") == "false") router.push("/")
+  }, [])
+  // useEffect(() => { 
+  //   console.log("window.localStorage.getItem('Session')", window.localStorage.getItem('Session'))
+  //   if (window.localStorage.getItem('Session') == "false") {
+  //     router.replace("/")
+  //   }
+  // }, [connected])
+
   return (
     <div className={styles.main}>
       <Header />
@@ -30,4 +50,4 @@ const connection2 = () => {
   );
 };
 
-export default connection2;
+export default Connection2;
